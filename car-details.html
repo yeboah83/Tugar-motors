@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Details | Tugar Motors - Tema Community 4</title>
+  <meta name="description" content="View full vehicle specifications, high-definition photo gallery, condition report, and arrange a viewing at Tugar Motors in Tema Community 4. Affiliated with Bowin Dawin Motors.">
+  <link rel="icon" type="image/png" href="TUGAR LOGO.png">
+
+  <!-- Bootstrap 5 CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Notification Bar -->
+  <header class="tm-top-bar d-none d-md-block">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <span><i class="bi bi-geo-alt-fill text-primary me-1"></i> Tema Community 4, Roundabouts, Ghana</span>
+          <span class="text-secondary">&bull;</span>
+          <span><i class="bi bi-shield-fill-check text-primary me-1"></i> Affiliated with <strong>Bowin Dawin Motors</strong></span>
+          <span class="text-secondary">&bull;</span>
+          <span><i class="bi bi-clock-fill text-primary me-1"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <a href="tel:+233243399697" class="fw-semibold"><i class="bi bi-telephone-fill me-1 text-primary"></i> 0243399697</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="https://wa.me/233535978264" target="_blank" class="fw-semibold text-success"><i class="bi bi-whatsapp me-1"></i> 0535978264</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar navbar-expand-lg tm-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand tm-brand" href="index.html">
+        <img src="TUGAR LOGO.png" alt="Tugar Motors Logo" class="tm-brand-logo">
+        <div class="tm-brand-text">
+          <span class="tm-brand-title">Tugar <span>Motors</span></span>
+          <span class="tm-brand-slogan">Beyond the Drive</span>
+        </div>
+        <span class="tm-brand-divider"></span>
+        <div class="tm-partner-brand" title="Bowin Dawin Motors Partner">
+          <img src="bowin-dawin-logo.png" alt="Bowin Dawin Motors Logo" class="tm-partner-logo">
+        </div>
+      </a>
+
+      <!-- Mobile Navbar Toggler -->
+      <button class="navbar-toggler border-0 shadow-none d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#tugarNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tugarNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="inventory.html">Available Cars</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link active" href="car-details.html">Featured Vehicle</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="contact.html">Contact & Location</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="https://wa.me/233535978264" target="_blank" class="btn btn-tm-whatsapp btn-sm px-3">
+            <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+          </a>
+          <a href="tel:+233243399697" class="btn btn-tm-outline btn-sm px-3 d-none d-xl-inline-flex">
+            <i class="bi bi-telephone-fill"></i> Call 0243399697
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb & Top Bar -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0 small">
+            <li class="breadcrumb-item"><a href="index.html" class="text-secondary">Home</a></li>
+            <li class="breadcrumb-item"><a href="inventory.html" class="text-secondary">Inventory</a></li>
+            <li class="breadcrumb-item active text-dark fw-bold" id="detail-breadcrumb-name" aria-current="page">Vehicle Details</li>
+          </ol>
+        </nav>
+        <div class="d-flex align-items-center gap-2 mt-2 mt-sm-0">
+          <span class="badge bg-light text-dark border small"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Tema Community 4</span>
+          <a href="inventory.html" class="text-primary fw-semibold small text-decoration-none">
+            <i class="bi bi-arrow-left"></i> Back to Inventory
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Vehicle Details Content -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <!-- Vehicle Title Header (No Price Tag) -->
+      <div class="row align-items-start mb-4">
+        <div class="col-lg-8">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span id="detail-car-status" class="badge-status badge-in-stock">In Stock</span>
+            <span id="detail-car-condition" class="badge bg-dark text-white">Brand New</span>
+            <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">100% GRA Customs Cleared</span>
+          </div>
+          <h1 class="display-6 fw-bold mb-1" id="detail-car-title">Zhengzhou Nissan Vehicle</h1>
+          <p class="text-muted lead mb-0" id="detail-car-tagline">Official Zhengzhou Nissan Lineup &bull; Tema Community 4</p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <div class="d-inline-flex flex-column align-items-lg-end">
+            <span class="badge bg-success text-white px-3 py-2 fs-6 fw-bold mb-1">
+              <i class="bi bi-patch-check-fill me-1"></i> 100% Brand New
+            </span>
+            <span class="small text-muted">Direct Factory Delivery &bull; 0 km Mileage</span>
+            <span class="small text-primary fw-semibold mt-1"><i class="bi bi-shield-check me-1"></i>Affiliated with Bowin Dawin Motors</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Left Column: Gallery & Description & Specs -->
+        <div class="col-lg-8">
+          <!-- Interactive Gallery -->
+          <div class="card border-0 shadow-sm p-3 rounded-4 bg-white mb-4">
+            <div class="gallery-main-viewport">
+              <img id="gallery-main-img" src="media/Nissan-Dongfeng-Z9.jpg" alt="Vehicle Photo" class="gallery-main-img">
+            </div>
+            <!-- Thumbnails -->
+            <div class="gallery-thumbs-container mt-2" id="gallery-thumbs-container">
+              <!-- Injected by details.js -->
+            </div>
+            <p class="text-muted small text-center mt-2 mb-0">
+              <i class="bi bi-hand-index-thumb me-1"></i> Click on any photo above to inspect exterior, interior, and component angles.
+            </p>
+          </div>
+
+          <!-- Quick Specs Strip -->
+          <div class="card border-0 shadow-sm p-3 rounded-4 bg-white mb-4">
+            <div class="row text-center g-2">
+              <div class="col-sm-2 col-4 border-end">
+                <span class="d-block text-muted small">Year</span>
+                <strong class="text-dark" id="spec-quick-year">2025</strong>
+              </div>
+              <div class="col-sm-2 col-4 border-end">
+                <span class="d-block text-muted small">Mileage</span>
+                <strong class="text-dark" id="spec-quick-mileage">0 km</strong>
+              </div>
+              <div class="col-sm-3 col-4 border-end">
+                <span class="d-block text-muted small">Transmission</span>
+                <strong class="text-dark" id="spec-quick-trans">Automatic</strong>
+              </div>
+              <div class="col-sm-3 col-6 border-end border-sm-end-0">
+                <span class="d-block text-muted small">Fuel Type</span>
+                <strong class="text-dark" id="spec-quick-fuel">Hybrid / Diesel</strong>
+              </div>
+              <div class="col-sm-2 col-6">
+                <span class="d-block text-muted small">Drivetrain</span>
+                <strong class="text-dark" id="spec-quick-drive">4WD</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vehicle Description -->
+          <div class="card border-0 shadow-sm p-4 rounded-4 bg-white mb-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-info-circle-fill text-primary me-2"></i> Vehicle Overview</h4>
+            <p class="text-secondary" id="detail-description" style="line-height: 1.8; font-size: 1.02rem;">
+              Loading overview...
+            </p>
+
+            <div class="alert alert-info border-0 rounded-3 mt-3 d-flex align-items-center gap-3">
+              <i class="bi bi-patch-check-fill fs-2 text-primary"></i>
+              <div>
+                <strong class="text-dark">Tugar Motors & Bowin Dawin Showroom Guarantee:</strong>
+                <p class="small text-secondary mb-0">
+                  Every vehicle sold at our Tema Community 4 facility is 100% Brand New directly from Zhengzhou Nissan, backed by official dealer warranty, full computer diagnostics, and genuine GRA customs duty documentation.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Full Specifications Table -->
+          <div class="card border-0 shadow-sm p-4 rounded-4 bg-white mb-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-sliders text-primary me-2"></i> Technical Specifications</h4>
+            <div class="table-responsive">
+              <table class="specs-table">
+                <tbody id="detail-specs-table-body">
+                  <!-- Injected by details.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Key Equipment & Features -->
+          <div class="card border-0 shadow-sm p-4 rounded-4 bg-white mb-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-star-fill text-warning me-2"></i> Key Features & Equipment</h4>
+            <div class="row" id="detail-features-list">
+              <!-- Injected by details.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Action Box, Booking, Showroom Support -->
+        <div class="col-lg-4">
+          <!-- Sticky Action Box -->
+          <div class="card border-0 shadow-sm p-4 rounded-4 bg-white mb-4 sticky-top" style="top: 100px; z-index: 10;">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="fw-bold mb-0">Enquire & Book Viewing</h5>
+              <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 small fw-bold">Brand New</span>
+            </div>
+            <p class="small text-muted mb-3">
+              Interested in this brand-new Nissan? Talk directly with our dealership manager to arrange a test drive, ask questions, or visit our showroom.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2 mb-3">
+              <a id="detail-btn-whatsapp" href="https://wa.me/233535978264" target="_blank" class="btn btn-tm-whatsapp py-3 fw-bold">
+                <i class="bi bi-whatsapp fs-5 me-1"></i> Enquire on WhatsApp
+              </a>
+              <button class="btn btn-tm-primary py-3 fw-bold" data-bs-toggle="modal" data-bs-target="#requestViewingModal">
+                <i class="bi bi-calendar2-check-fill me-1"></i> Request a Viewing / Test Drive
+              </button>
+              <a href="tel:+233243399697" class="btn btn-tm-outline py-2 fw-semibold">
+                <i class="bi bi-telephone-fill me-1"></i> Call 0243399697
+              </a>
+            </div>
+
+            <!-- Showroom Details Quick Box -->
+            <div class="p-3 bg-light rounded-3 border mb-3">
+              <h6 class="fw-bold small mb-2"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Showroom Location</h6>
+              <p class="small text-muted mb-2">Tema Community 4, Roundabouts, Greater Accra, Ghana</p>
+              <div class="d-flex justify-content-between small text-secondary">
+                <span>Working Hours:</span>
+                <span class="fw-bold text-dark">Mon - Sat (8am - 6pm)</span>
+              </div>
+            </div>
+
+            <!-- Showroom Guarantee & Support Box -->
+            <div class="p-3 rounded-3 bg-dark text-white">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-shield-check text-warning fs-5"></i>
+                <h6 class="fw-bold text-white mb-0 small">Showroom Guarantee &amp; Support</h6>
+              </div>
+              <p class="small text-light opacity-80 mb-2" style="font-size: 0.82rem; line-height: 1.5;">
+                Affiliated with Bowin Dawin Motors. 3-Year official warranty coverage &amp; full GRA customs clearance included.
+              </p>
+              <a href="https://wa.me/233535978264?text=Hello%20Tugar%20Motors!%20I'd%20like%20more%20information%20about%20this%20Brand%20New%20Nissan." target="_blank" class="btn btn-sm btn-light text-dark fw-bold w-100 py-2 shadow-sm">
+                <i class="bi bi-chat-dots-fill me-1"></i> Speak with Showroom Manager
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Nissan Models Recommendations -->
+      <div class="mt-5 pt-4 border-top">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h3 class="fw-bold mb-0">Other Brand New Nissan Models</h3>
+            <p class="text-muted small mb-0">Explore the complete Zhengzhou Nissan lineup available at Tema Community 4.</p>
+          </div>
+          <a href="inventory.html" class="btn btn-sm btn-tm-outline">View All Models</a>
+        </div>
+        <div class="row" id="similar-cars-container">
+          <!-- Injected by details.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal: Request a Viewing / Test Drive -->
+  <div class="modal fade" id="requestViewingModal" tabindex="-1" aria-labelledby="requestViewingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header bg-dark text-white rounded-top-4">
+          <div>
+            <h5 class="modal-title fw-bold" id="requestViewingModalLabel">Schedule a Showroom Viewing</h5>
+            <span class="small text-secondary">Tema Community 4, Roundabouts &bull; Affiliated with Bowin Dawin Motors</span>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form class="tugar-enquiry-form">
+            <div class="mb-3">
+              <label class="form-label fw-bold small">Vehicle of Interest</label>
+              <input type="text" name="car_model" id="viewing-modal-car-name" class="form-control bg-light" readonly>
+            </div>
+            <div class="row g-2 mb-3">
+              <div class="col-md-6">
+                <label class="form-label fw-bold small">Your Full Name *</label>
+                <input type="text" name="client_name" class="form-control" placeholder="e.g. Samuel Mensah" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-bold small">Phone / WhatsApp *</label>
+                <input type="tel" name="client_phone" class="form-control" placeholder="e.g. 0244123456" required>
+              </div>
+            </div>
+            <div class="row g-2 mb-3">
+              <div class="col-md-6">
+                <label class="form-label fw-bold small">Preferred Date</label>
+                <input type="date" name="preferred_date" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-bold small">Preferred Time</label>
+                <select name="preferred_time" class="form-select">
+                  <option value="Morning (9:00 AM - 12:00 PM)">Morning (9:00 AM - 12:00 PM)</option>
+                  <option value="Afternoon (1:00 PM - 4:00 PM)">Afternoon (1:00 PM - 4:00 PM)</option>
+                  <option value="Late Afternoon (4:00 PM - 6:00 PM)">Late Afternoon (4:00 PM - 6:00 PM)</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold small">Additional Notes (Optional)</label>
+              <textarea name="client_message" class="form-control" rows="2" placeholder="Let us know your preferred time or any specific questions about this vehicle..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-tm-primary w-100 py-3 fw-bold">
+              Confirm Viewing Appointment
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="tm-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="TUGAR LOGO.png" alt="Tugar Motors Logo" style="height: 48px;">
+            <div class="vr bg-secondary opacity-50" style="height: 36px;"></div>
+            <img src="bowin-dawin-logo.png" alt="Bowin Dawin Motors Logo" style="height: 40px;">
+            <div>
+              <h5 class="mb-0 text-white fw-bold">TUGAR MOTORS</h5>
+              <span class="text-warning small text-uppercase letter-spacing-1 fw-bold">Beyond the Drive</span>
+            </div>
+          </div>
+          <p class="small text-secondary mb-3">
+            Tema’s premier automotive dealership, affiliated with <strong>Bowin Dawin Motors</strong>. Providing official brand-new Zhengzhou Nissan pickups (Z9, Rich 6, Rich 7) and the Paladin 4x4 SUV with genuine documentation, 120-point mechanical inspections, and personal customer service.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="https://wa.me/233535978264" target="_blank" class="btn btn-sm btn-outline-secondary text-white rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+              <i class="bi bi-whatsapp"></i>
+            </a>
+            <a href="tel:+233243399697" class="btn btn-sm btn-outline-secondary text-white rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+              <i class="bi bi-telephone-fill"></i>
+            </a>
+            <a href="mailto:otoosamuel605@gmail.com" class="btn btn-sm btn-outline-secondary text-white rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+              <i class="bi bi-envelope-fill"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="index.html">Home</a></li>
+            <li class="mb-2"><a href="inventory.html">Available Inventory</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-z9-2025">Nissan Z9 Flagship</a></li>
+            <li class="mb-2"><a href="about.html">About Tugar Motors</a></li>
+            <li class="mb-2"><a href="contact.html">Contact & Location</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h5>Nissan Lineup</h5>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="car-details.html?id=nissan-z9-2025">Nissan Z9 GE PHEV 4x4</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-rich6-2025">Nissan Rich 6 Double Cab</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-rich7-2025">Nissan Rich 7 Luxury 4x4</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-paladin-2025">Nissan Paladin Off-Road SUV</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h5>Showroom Contact</h5>
+          <ul class="list-unstyled small text-secondary">
+            <li class="mb-2 d-flex align-items-start gap-2">
+              <i class="bi bi-geo-alt-fill text-primary mt-1"></i>
+              <span>Tema Community 4, Roundabouts, Greater Accra, Ghana</span>
+            </li>
+            <li class="mb-2 d-flex align-items-center gap-2">
+              <i class="bi bi-patch-check-fill text-primary"></i>
+              <span>Affiliated with <strong>Bowin Dawin Motors</strong></span>
+            </li>
+            <li class="mb-2 d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-primary"></i>
+              <a href="tel:+233243399697" class="text-white fw-bold">0243399697</a>
+            </li>
+            <li class="mb-2 d-flex align-items-center gap-2">
+              <i class="bi bi-whatsapp text-success"></i>
+              <a href="https://wa.me/233535978264" target="_blank" class="text-white fw-bold">0535978264 (WhatsApp)</a>
+            </li>
+            <li class="mb-2 d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-primary"></i>
+              <a href="mailto:otoosamuel605@gmail.com" class="text-white">otoosamuel605@gmail.com</a>
+            </li>
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-clock-fill text-primary"></i>
+              <span>Mon - Sat: 8:00 AM - 6:00 PM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tm-footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+        <div>
+          &copy; 2026 <strong>Tugar Motors</strong> &bull; Affiliated with <strong>Bowin Dawin Motors</strong>. All Rights Reserved.
+        </div>
+        <div class="text-muted small mt-2 mt-md-0">
+          Location: Tema Community 4, Roundabouts &bull; Manager: Samuel Otoo
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick-Chat Button -->
+  <a href="https://wa.me/233535978264?text=Hello%20Tugar%20Motors!%20I'm%20chatting%20from%20a%20vehicle%20details%20page." target="_blank" class="floating-whatsapp-btn" aria-label="Chat on WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+    <span class="floating-whatsapp-tooltip">Chat with Samuel on WhatsApp</span>
+  </a>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Vehicle Data & Core Logic -->
+  <script src="js/cars-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/details.js"></script>
+</body>
+</html>
