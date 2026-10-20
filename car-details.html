@@ -138,15 +138,18 @@
         <div class="col-lg-8">
           <!-- Interactive Gallery -->
           <div class="card border-0 shadow-sm p-3 rounded-4 bg-white mb-4">
-            <div class="gallery-main-viewport">
+            <div class="gallery-main-viewport" id="gallery-main-viewport" tabindex="0" role="group" aria-label="Vehicle photo gallery. Swipe left or right to view photos.">
               <img id="gallery-main-img" src="media/Nissan-Dongfeng-Z9.jpg" alt="Vehicle Photo" class="gallery-main-img">
-            </div>
-            <!-- Thumbnails -->
-            <div class="gallery-thumbs-container mt-2" id="gallery-thumbs-container">
-              <!-- Injected by details.js -->
+              <button class="gallery-nav gallery-nav-previous" id="gallery-previous" type="button" aria-label="Previous vehicle photo">
+                <i class="bi bi-chevron-left" aria-hidden="true"></i>
+              </button>
+              <button class="gallery-nav gallery-nav-next" id="gallery-next" type="button" aria-label="Next vehicle photo">
+                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+              </button>
+              <span class="gallery-counter" id="gallery-counter" aria-live="polite"></span>
             </div>
             <p class="text-muted small text-center mt-2 mb-0">
-              <i class="bi bi-hand-index-thumb me-1"></i> Click on any photo above to inspect exterior, interior, and component angles.
+              <i class="bi bi-arrow-left-right me-1"></i> Swipe left or right to view exterior, interior, and component photos.
             </p>
           </div>
 
@@ -155,7 +158,7 @@
             <div class="row text-center g-2">
               <div class="col-sm-2 col-4 border-end">
                 <span class="d-block text-muted small">Year</span>
-                <strong class="text-dark" id="spec-quick-year">2025</strong>
+                <strong class="text-dark" id="spec-quick-year">2026</strong>
               </div>
               <div class="col-sm-2 col-4 border-end">
                 <span class="d-block text-muted small">Mileage</span>
@@ -191,6 +194,26 @@
                   Every vehicle sold at our Tema Community 4 facility is 100% Brand New directly from Zhengzhou Nissan, backed by official dealer warranty, full computer diagnostics, and genuine GRA customs duty documentation.
                 </p>
               </div>
+            </div>
+          </div>
+
+          <!-- Real Showroom Interior & Cabin Photos Section -->
+          <div class="card border-0 shadow-sm p-4 rounded-4 bg-white mb-4" id="detail-interior-section">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+              <div>
+                <h4 class="fw-bold mb-1">
+                  <i class="bi bi-camera-fill text-primary me-2"></i> Showroom Interior &amp; Cabin Photos
+                </h4>
+                <p class="text-muted small mb-0">
+                  Actual physical inspection photos of the cockpit, seats, dashboard, and finish taken directly at our showroom. Click any image to view in the main display.
+                </p>
+              </div>
+              <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-3 py-2 fw-bold mt-2 mt-sm-0" id="detail-interior-count">
+                Interior Photos
+              </span>
+            </div>
+            <div class="row g-3" id="detail-interior-grid">
+              <!-- Injected by details.js -->
             </div>
           </div>
 
@@ -372,7 +395,7 @@
           <ul class="list-unstyled small">
             <li class="mb-2"><a href="index.html">Home</a></li>
             <li class="mb-2"><a href="inventory.html">Available Inventory</a></li>
-            <li class="mb-2"><a href="car-details.html?id=nissan-z9-2025">Nissan Z9 Flagship</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-z9-2026">Nissan Z9 Flagship</a></li>
             <li class="mb-2"><a href="about.html">About Tugar Motors</a></li>
             <li class="mb-2"><a href="contact.html">Contact & Location</a></li>
           </ul>
@@ -381,10 +404,10 @@
         <div class="col-lg-3 col-md-6">
           <h5>Nissan Lineup</h5>
           <ul class="list-unstyled small">
-            <li class="mb-2"><a href="car-details.html?id=nissan-z9-2025">Nissan Z9 GE PHEV 4x4</a></li>
-            <li class="mb-2"><a href="car-details.html?id=nissan-rich6-2025">Nissan Rich 6 Double Cab</a></li>
-            <li class="mb-2"><a href="car-details.html?id=nissan-rich7-2025">Nissan Rich 7 Luxury 4x4</a></li>
-            <li class="mb-2"><a href="car-details.html?id=nissan-paladin-2025">Nissan Paladin Off-Road SUV</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-z9-2026">Nissan Z9 GE PHEV 4x4</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-rich6-2026">Nissan Rich 6 Double Cab</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-rich7-2026">Nissan Rich 7 Luxury 4x4</a></li>
+            <li class="mb-2"><a href="car-details.html?id=nissan-paladin-2026">Nissan Paladin Off-Road SUV</a></li>
           </ul>
         </div>
 

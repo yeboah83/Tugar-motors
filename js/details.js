@@ -15,7 +15,7 @@ function initCarDetailsPage() {
 
   // Default to flagship Z9 if no param or not found
   if (!carId) {
-    carId = "nissan-z9-2025";
+    carId = "nissan-z9-2026";
   }
 
   let car = findCarById(carId);
@@ -66,30 +66,106 @@ function initCarDetailsPage() {
 
   // 4. Interactive Gallery
   const mainImg = document.getElementById("gallery-main-img");
-  const thumbsContainer = document.getElementById("gallery-thumbs-container");
+  const galleryViewport = document.getElementById("gallery-main-viewport");
+  const previousButton = document.getElementById("gallery-previous");
+  const nextButton = document.getElementById("gallery-next");
+  const galleryCounter = document.getElementById("gallery-counter");
   
-  if (mainImg && car.gallery && car.gallery.length > 0) {
-    mainImg.src = car.gallery[0];
-    mainImg.alt = car.name;
+  // Main slider = exterior gallery + real interior photos
+  const interiorPhotos = Array.isArray(car.interiorGallery) ? car.interiorGallery : [];
+  const allPhotos = [...(car.gallery || []), ...interiorPhotos];
+  const photoSrc = (path) => encodeURI(path); // local folders contain spaces / brackets
+  let jumpToPhoto = null;
 
-    if (thumbsContainer) {
-      thumbsContainer.innerHTML = car.gallery.map((imgSrc, index) => `
-        <div class="gallery-thumb ${index === 0 ? 'active' : ''}" data-index="${index}">
-          <img src="${imgSrc}" alt="${car.name} thumb ${index + 1}">
+  if (mainImg && allPhotos.length > 0) {
+    let currentImageIndex = 0;
+    let pointerStart = null;
+
+    const showImage = (index) => {
+      currentImageIndex = (index + allPhotos.length) % allPhotos.length;
+      mainImg.style.opacity = "0.4";
+      setTimeout(() => {
+        mainImg.src = photoSrc(allPhotos[currentImageIndex]);
+        mainImg.alt = `${car.name} photo ${currentImageIndex + 1} of ${allPhotos.length}`;
+        mainImg.style.opacity = "1";
+        if (galleryCounter) {
+          galleryCounter.textContent = `${currentImageIndex + 1} / ${allPhotos.length}`;
+        }
+      }, 150);
+    };
+    jumpToPhoto = showImage;
+
+    mainImg.src = photoSrc(allPhotos[0]);
+    mainImg.alt = `${car.name} photo 1 of ${allPhotos.length}`;
+    if (galleryCounter) {
+      galleryCounter.textContent = `1 / ${allPhotos.length}`;
+    }
+
+    if (previousButton) {
+      previousButton.addEventListener("click", () => showImage(currentImageIndex - 1));
+    }
+    if (nextButton) {
+      nextButton.addEventListener("click", () => showImage(currentImageIndex + 1));
+    }
+
+    if (galleryViewport) {
+      galleryViewport.addEventListener("pointerdown", (event) => {
+        pointerStart = { x: event.clientX, y: event.clientY };
+      });
+
+      galleryViewport.addEventListener("pointerup", (event) => {
+        if (!pointerStart) return;
+        const deltaX = event.clientX - pointerStart.x;
+        const deltaY = event.clientY - pointerStart.y;
+        pointerStart = null;
+
+        if (Math.abs(deltaX) < 40 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+        showImage(currentImageIndex + (deltaX < 0 ? 1 : -1));
+      });
+
+      galleryViewport.addEventListener("pointercancel", () => {
+        pointerStart = null;
+      });
+
+      galleryViewport.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          showImage(currentImageIndex - 1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          showImage(currentImageIndex + 1);
+        }
+      });
+    }
+  }
+
+  // 4b. Real Interior Photos section
+  const interiorSection = document.getElementById("detail-interior-section");
+  const interiorGrid = document.getElementById("detail-interior-grid");
+  if (interiorSection && interiorGrid) {
+    if (interiorPhotos.length === 0) {
+      interiorSection.classList.add("d-none");
+    } else {
+      interiorSection.classList.remove("d-none");
+      const countBadge = document.getElementById("detail-interior-count");
+      if (countBadge) countBadge.textContent = `${interiorPhotos.length} Photos`;
+      const exteriorCount = (car.gallery || []).length;
+
+      interiorGrid.innerHTML = interiorPhotos.map((path, i) => `
+        <div class="col-6 col-md-4">
+          <button type="button" class="interior-thumb" data-photo-index="${exteriorCount + i}" aria-label="View ${car.model} interior photo ${i + 1} in the main gallery">
+            <img src="${photoSrc(path)}" alt="${car.model} interior photo ${i + 1}" loading="lazy">
+            <span class="interior-thumb-zoom"><i class="bi bi-arrows-fullscreen"></i></span>
+          </button>
         </div>
       `).join("");
 
-      const thumbs = thumbsContainer.querySelectorAll(".gallery-thumb");
-      thumbs.forEach(thumb => {
-        thumb.addEventListener("click", () => {
-          const idx = parseInt(thumb.getAttribute("data-index"));
-          thumbs.forEach(t => t.classList.remove("active"));
-          thumb.classList.add("active");
-          mainImg.style.opacity = "0.4";
-          setTimeout(() => {
-            mainImg.src = car.gallery[idx];
-            mainImg.style.opacity = "1";
-          }, 150);
+      interiorGrid.querySelectorAll(".interior-thumb").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (!jumpToPhoto) return;
+          jumpToPhoto(parseInt(btn.getAttribute("data-photo-index"), 10));
+          const viewport = document.getElementById("gallery-main-viewport");
+          if (viewport) viewport.scrollIntoView({ behavior: "smooth", block: "center" });
         });
       });
     }

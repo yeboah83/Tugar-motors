@@ -9,11 +9,11 @@
 
 const TUGAR_CARS = [
   {
-    id: "nissan-z9-2025",
-    name: "2025 Zhengzhou Nissan Z9 GE PHEV 4x4",
+    id: "nissan-z9-2026",
+    name: "2026 Zhengzhou Nissan Z9 GE PHEV 4x4",
     make: "Nissan",
     model: "Z9 GE PHEV",
-    year: 2025,
+    year: 2026,
     condition: "Brand New",
     mileage: "0 km (Brand New)",
     transmission: "Automatic",
@@ -28,7 +28,7 @@ const TUGAR_CARS = [
     image: "media/Nissan-Dongfeng-Z9.jpg",
     gallery: [
       "media/Nissan-Dongfeng-Z9.jpg",
-      "media/images (8).jpg",
+      "media/images (11).jpg",
       "media/images (3).jpg",
       "media/images (4).jpg",
       "media/images (5).jpg",
@@ -37,6 +37,17 @@ const TUGAR_CARS = [
       "media/images (1).jpg",
       "media/images.jpg",
       "media/images (2).jpg"
+    ],
+    // Real showroom interior photos (media/z9)
+    interiorGallery: [
+      "media/z9/WhatsApp Image 2026-10-13 at 6.36.21 PM.jpeg",
+      "media/z9/WhatsApp Image 2026-10-13 at 6.36.22 PM.jpeg",
+      "media/z9/WhatsApp Image 2026-10-13 at 6.36.23 PM (1).jpeg",
+      "media/z9/WhatsApp Image 2026-10-13 at 6.36.23 PM.jpeg",
+      "media/z9/WhatsApp Image 2026-10-13 at 6.36.24 PM (1).jpeg",
+      "media/z9/WhatsApp Image 2026-10-13 at 6.36.24 PM (2).jpeg",
+      "media/z9/WhatsApp Image 2026-10-13 at 6.36.24 PM.jpeg",
+      "media/z9/WhatsApp Image 2026-10-13 at 6.36.25 PM.jpeg"
     ],
     tagline: "The Flagship Electric-Hybrid Pickup - Rugged Luxury for Ghana's Roads",
     description: "The all-new Zhengzhou Nissan Z9 GE PHEV represents the future of heavy-duty double-cab luxury pickups. Engineered in partnership with Dongfeng and Nissan, this high-performance vehicle combines a high-efficiency turbocharged engine with intelligent electric dual motors, delivering unmatched 435 HP torque while maintaining superb fuel economy. Equipped with state-of-the-art dual digital displays, heated leather seats, terrain response dial, and heavy-duty suspension calibrated for rugged West African terrains and executive city cruising alike.",
@@ -50,6 +61,7 @@ const TUGAR_CARS = [
       "Combined Range": "Over 1,000 km on Full Tank",
       "Fuel Consumption": "3.8 L / 100 km (Hybrid Mode)",
       "Seating Capacity": "5 Executive Seats",
+      "Interior & Cabin": "Factory-Fresh Black Leather, Dual Screens & Satin Trim (See Showroom Photos Below)",
       "Payload Capacity": "1,150 kg",
       "Towing Capacity": "3,500 kg Braked",
       "Ground Clearance": "235 mm",
@@ -70,11 +82,11 @@ const TUGAR_CARS = [
     ]
   },
   {
-    id: "nissan-rich6-2025",
-    name: "2025 Zhengzhou Nissan Rich 6 4x4 Double Cab",
+    id: "nissan-rich6-2026",
+    name: "2026 Zhengzhou Nissan Rich 6 4x4 Double Cab",
     make: "Nissan",
     model: "Rich 6",
-    year: 2025,
+    year: 2026,
     condition: "Brand New",
     mileage: "0 km (Brand New)",
     transmission: "8-Speed Automatic",
@@ -96,6 +108,12 @@ const TUGAR_CARS = [
       "https://bowindawinauto.com/wp-content/uploads/2025/11/Nissan-Rich-6-1.jpg",
       "https://bowindawinauto.com/wp-content/uploads/2025/11/Nissan-Rich-6-2.jpg"
     ],
+    // Real showroom interior photos (media/rich 6)
+    interiorGallery: [
+      "media/rich 6/WhatsApp Image 2026-10-13 at 6.28.36 PM.jpeg",
+      "media/rich 6/WhatsApp Image 2026-10-13 at 6.28.36 PM (1).jpeg",
+      "media/rich 6/WhatsApp Image 2026-10-13 at 6.28.36 PM (2).jpeg"
+    ],
     tagline: "Tough, Economical Workhorse Built on the Proven Nissan Navara Platform",
     description: "When your business and projects demand maximum efficiency with zero compromises, trust the brand-new Nissan Rich 6. Engineered on the proven Nissan Navara ladder-frame chassis with the renowned M9T 2.3L turbo diesel engine delivering 380 Nm of pulling torque, the Rich 6 is built to thrive on Ghanaian roads. It balances heavy commercial payload capacity with a high-comfort cabin featuring a 10-inch smart touchscreen, climate control, and advanced safety systems.",
     specs: {
@@ -108,6 +126,7 @@ const TUGAR_CARS = [
       "Payload Capacity": "1,000 kg Heavy Load Rating",
       "Fuel Tank": "73 Litres High Capacity",
       "Seating Capacity": "5 Passenger Double Cab",
+      "Interior & Cabin": "Ergonomic Charcoal Comfort Double-Cab Interior (See Showroom Photos Below)",
       "Ground Clearance": "215 mm High Clearance",
       "Customs Status": "100% GRA Customs Cleared & Verified",
       "Warranty": "3 Years Official Dealer Warranty"
@@ -124,11 +143,11 @@ const TUGAR_CARS = [
     ]
   },
   {
-    id: "nissan-rich7-2025",
-    name: "2025 Zhengzhou Nissan Rich 7 4x4 Luxury Double Cab",
+    id: "nissan-rich7-2026",
+    name: "2026 Zhengzhou Nissan Rich 7 4x4 Luxury Double Cab",
     make: "Nissan",
     model: "Rich 7",
-    year: 2025,
+    year: 2026,
     condition: "Brand New",
     mileage: "0 km (Brand New)",
     transmission: "ZF 8-Speed Automatic",
@@ -151,6 +170,15 @@ const TUGAR_CARS = [
       "https://bowindawinauto.com/wp-content/uploads/2025/12/ruiqi7-neishi-2.jpg",
       "https://bowindawinauto.com/wp-content/uploads/2025/12/ruiqi7-neishi.jpg"
     ],
+    // Real showroom interior photos (media/rich 7)
+    interiorGallery: [
+      "media/rich 7/WhatsApp Image 2026-10-13 at 6.30.39 PM.jpeg",
+      "media/rich 7/WhatsApp Image 2026-10-13 at 6.30.40 PM (1).jpeg",
+      "media/rich 7/WhatsApp Image 2026-10-13 at 6.30.40 PM (2).jpeg",
+      "media/rich 7/WhatsApp Image 2026-10-13 at 6.30.40 PM.jpeg",
+      "media/rich 7/WhatsApp Image 2026-10-13 at 6.30.41 PM (1).jpeg",
+      "media/rich 7/WhatsApp Image 2026-10-13 at 6.30.41 PM.jpeg"
+    ],
     tagline: "Executive Luxury & High-Tech Refinement Meets Hardcore 4x4 Muscle",
     description: "The brand-new Nissan Rich 7 elevates the pickup experience into executive luxury. Breaking away from traditional utility stereotypes, it couples a 168 kW 2.0T engine with the world-renowned ZF 8-speed automatic transmission. Inside, passengers enjoy yacht-inspired styling, soft-touch leather upholstery, quiet cabin soundproofing, dual digital displays, and intelligent electronic 4WD. Perfect for executive commuting, family comfort, and weekend cross-country adventures.",
     specs: {
@@ -161,6 +189,7 @@ const TUGAR_CARS = [
       "Drivetrain": "Electronic 4WD with Multi-Terrain Drive Modes",
       "Chassis": "Body-on-Frame High Rigidity Frame",
       "Seating Capacity": "5 Executive Luxury Seats",
+      "Interior & Cabin": "Premium Saddle Brown Leather & Yacht-Style Console (See Showroom Photos Below)",
       "Cargo Box": "Durable Weatherproof Protected Cargo Liner",
       "Ground Clearance": "225 mm",
       "Customs Status": "100% GRA Customs Cleared & Verified",
@@ -178,11 +207,11 @@ const TUGAR_CARS = [
     ]
   },
   {
-    id: "nissan-paladin-2025",
-    name: "2025 Zhengzhou Nissan Paladin 4x4 Off-Road SUV",
+    id: "nissan-paladin-2026",
+    name: "2026 Zhengzhou Nissan Paladin 4x4 Off-Road SUV",
     make: "Nissan",
     model: "Paladin",
-    year: 2025,
+    year: 2026,
     condition: "Brand New",
     mileage: "0 km (Brand New)",
     transmission: "ZF 8-Speed Automatic",
@@ -197,10 +226,9 @@ const TUGAR_CARS = [
     image: "https://www-asia.nissan-cdn.net/content/dam/Nissan/th/vehicles/VLP/nissan-terra-my23/optimization/design/terra-sport-1600x900-pc_tablet.jpg",
     gallery: [
       "https://www-asia.nissan-cdn.net/content/dam/Nissan/th/vehicles/VLP/nissan-terra-my23/optimization/design/terra-sport-1600x900-pc_tablet.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/2024_Nissan_Terra_2.5_VL_4x4_in_Aspen_Pearl_White%2C_front_left.jpg/1200px-2024_Nissan_Terra_2.5_VL_4x4_in_Aspen_Pearl_White%2C_front_left.jpg",
-      "https://en.dongfeng-club.com/graphics/gallery/full/373-dongfeng-paladin-1163993.jpg",
-      "https://en.dongfeng-club.com/graphics/gallery/full/131-dongfeng-oting-facelift-01-china-2016-04-08.jpg"
+      "https://en.dongfeng-club.com/graphics/gallery/full/373-dongfeng-paladin-1163993.jpg"
     ],
+    interiorGallery: [],
     tagline: "Dakar Rally Heritage - Rugged Body-on-Frame 7-Seater Luxury 4x4 SUV",
     description: "The legendary Nissan Paladin is back in its latest 7-seater incarnation, built by Zhengzhou Nissan with genuine Dakar Rally endurance heritage. Featuring an indestructible ladder-frame chassis derived from Nissan's premier truck platform, the Paladin is equipped with a 2.0L turbocharged engine generating 228 HP, a ZF 8-speed automatic gearbox, triple-lock 4WD capability, and 700 mm water wading depth. The interior provides true executive tranquility with 3-row seating, a 12-inch multimedia system, and a 540-degree transparent chassis camera.",
     specs: {
@@ -211,6 +239,7 @@ const TUGAR_CARS = [
       "Drivetrain": "Professional 4WD (2H / 4H / 4L) with Front & Rear Diff Locks",
       "Chassis": "Heavy-Duty Body-on-Frame Ladder Chassis",
       "Seating Capacity": "7 Executive Passengers (3 Rows)",
+      "Interior & Cabin": "Luxury 3-Row 7-Seater Leather with Woodgrain Accents",
       "Wading Depth": "700 mm High Water Clearance",
       "Ground Clearance": "215 mm Off-Road Clearance",
       "Approach / Departure Angles": "32° Approach / 27° Departure",

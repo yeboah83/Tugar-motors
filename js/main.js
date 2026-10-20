@@ -245,52 +245,120 @@ function initInventoryPage() {
 }
 
 /* ==========================================================================
-   5. MODALS, VIEWING APPOINTMENTS & ENQUIRY FORMS
+   5. MODALS, VIEWING APPOINTMENTS & ENQUIRY FORMS -> WHATSAPP
+   Every booking / enquiry form is sent straight to the showroom WhatsApp
+   (0535978264) as a pre-filled, formatted message.
    ========================================================================== */
+const TUGAR_WHATSAPP_NUMBER = "233535978264";
+
+function tmFieldValue(form, name) {
+  const el = form.querySelector(`[name='${name}']`);
+  return el && el.value ? el.value.trim() : "";
+}
+
+function tmFormatDate(value) {
+  if (!value) return "";
+  const d = new Date(`${value}T00:00:00`);
+  if (isNaN(d)) return value;
+  return d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+}
+
+function buildBookingWhatsAppMessage(form) {
+  const name = tmFieldValue(form, "client_name");
+  const phone = tmFieldValue(form, "client_phone");
+  const email = tmFieldValue(form, "client_email");
+  const inquiryType = tmFieldValue(form, "inquiry_type");
+  const vehicle = tmFieldValue(form, "car_model");
+  const date = tmFormatDate(tmFieldValue(form, "preferred_date"));
+  const time = tmFieldValue(form, "preferred_time");
+  const message = tmFieldValue(form, "client_message");
+
+  const isAppointment = !!(date || time || form.closest("#requestViewingModal") || !inquiryType);
+  const title = isAppointment ? "NEW SHOWROOM APPOINTMENT REQUEST" : "NEW WEBSITE ENQUIRY";
+
+  const lines = [
+    `*${title}*`,
+    "Tugar Motors - Tema Community 4",
+    "",
+  ];
+  if (name) lines.push(`*Name:* ${name}`);
+  if (phone) lines.push(`*Phone:* ${phone}`);
+  if (email) lines.push(`*Email:* ${email}`);
+  if (inquiryType) lines.push(`*Enquiry Type:* ${inquiryType}`);
+  if (vehicle) lines.push(`*Vehicle:* Brand New ${vehicle}`);
+  if (date) lines.push(`*Preferred Date:* ${date}`);
+  if (time) lines.push(`*Preferred Time:* ${time}`);
+  if (message) lines.push(`*Notes:* ${message}`);
+  lines.push("", `_Sent from the Tugar Motors website (${document.title.split("|")[0].trim()})_`);
+
+  return lines.join("\n");
+}
+
 function initModalsAndForms() {
+  // Prevent booking dates in the past
+  const today = new Date();
+  const isoToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+  document.querySelectorAll("input[type='date'][name='preferred_date']").forEach(input => {
+    input.min = isoToday;
+  });
+
   const forms = document.querySelectorAll(".tugar-enquiry-form");
   forms.forEach(form => {
+    // Small hint so clients know the booking opens WhatsApp
+    const submitBtn = form.querySelector("button[type='submit']");
+    if (submitBtn && !form.querySelector(".tm-wa-hint")) {
+      const hint = document.createElement("div");
+      hint.className = "tm-wa-hint small mt-2 mb-0 text-center";
+      hint.style.opacity = "0.8";
+      hint.innerHTML = `<i class="bi bi-whatsapp text-success me-1"></i> Your details will be sent directly to our WhatsApp (0535978264).`;
+      submitBtn.insertAdjacentElement("afterend", hint);
+    }
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-
-      const name = form.querySelector("[name='client_name']") ? form.querySelector("[name='client_name']").value : "Client";
-      const phone = form.querySelector("[name='client_phone']") ? form.querySelector("[name='client_phone']").value : "";
-      const vehicle = form.querySelector("[name='car_model']") ? form.querySelector("[name='car_model']").value : "General Inquiry";
-
-      const submitBtn = form.querySelector("button[type='submit']");
-      const originalBtnText = submitBtn ? submitBtn.innerHTML : "Submit";
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Submitting...`;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
       }
 
+      const esc = s => s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      const name = esc(tmFieldValue(form, "client_name") || "Client");
+      const vehicle = esc(tmFieldValue(form, "car_model") || "Nissan vehicle");
+      const waUrl = `https://wa.me/${TUGAR_WHATSAPP_NUMBER}?text=${encodeURIComponent(buildBookingWhatsAppMessage(form))}`;
+
+      // Open WhatsApp synchronously (inside the click) so pop-up blockers allow it
+      const win = window.open(waUrl, "_blank");
+      if (!win) window.location.href = waUrl;
+
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : "";
+      if (submitBtn) {
+        submitBtn.innerHTML = `<i class="bi bi-check-circle-fill me-2 text-white"></i> Opening WhatsApp...`;
+      }
+
+      form.parentNode.querySelectorAll(".tm-wa-success").forEach(el => el.remove());
+      const successBox = document.createElement("div");
+      successBox.className = "alert alert-success mt-3 alert-dismissible fade show shadow-sm tm-wa-success";
+      successBox.innerHTML = `
+        <strong>Thank you, ${name}!</strong> Your request for the Brand New <strong>${vehicle}</strong> has been prepared in WhatsApp.
+        Please tap <strong>Send</strong> in WhatsApp to deliver it to our showroom team.
+        <hr>
+        <p class="mb-0 small">WhatsApp didn't open?
+          <a href="${waUrl}" target="_blank" class="fw-bold text-success text-decoration-underline">
+            <i class="bi bi-whatsapp"></i> Click here to send your booking (0535978264)
+          </a>
+        </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      `;
+      form.parentNode.insertBefore(successBox, form.nextSibling);
+
+      // Reset the form but keep read-only fields (e.g. vehicle name in the modal)
+      const keep = Array.from(form.querySelectorAll("[readonly]")).map(el => [el, el.value]);
+      form.reset();
+      keep.forEach(([el, val]) => { el.value = val; });
+
       setTimeout(() => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = `<i class="bi bi-check-circle-fill me-2 text-white"></i> Enquiry Sent!`;
-        }
-
-        const successBox = document.createElement("div");
-        successBox.className = "alert alert-success mt-3 alert-dismissible fade show shadow-sm";
-        successBox.innerHTML = `
-          <strong>Thank you, ${name}!</strong> Your request regarding the Brand New <strong>${vehicle}</strong> has been logged.
-          Our team at Tema Community 4 (in partnership with Bowin Dawin Motors) will contact you at <strong>${phone}</strong> shortly.
-          <hr>
-          <p class="mb-0 small">Want instant confirmation? 
-            <a href="${getWhatsAppGeneralLink(`Inquiry from ${name} about ${vehicle}`)}" target="_blank" class="fw-bold text-success text-decoration-underline">
-              <i class="bi bi-whatsapp"></i> Chat directly with Samuel on WhatsApp (0535978264)
-            </a>
-          </p>
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        `;
-        form.parentNode.insertBefore(successBox, form.nextSibling);
-
-        form.reset();
-
-        setTimeout(() => {
-          if (submitBtn) submitBtn.innerHTML = originalBtnText;
-        }, 5000);
-      }, 700);
+        if (submitBtn) submitBtn.innerHTML = originalBtnText;
+      }, 4000);
     });
   });
 }
