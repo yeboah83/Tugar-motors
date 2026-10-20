@@ -98,10 +98,10 @@
               <li class="breadcrumb-item active text-white" aria-current="page">Available Inventory</li>
             </ol>
           </nav>
-          <span class="badge bg-primary text-uppercase px-3 py-1.5 mb-2 fw-bold" style="font-size: 0.75rem;">Official Zhengzhou Nissan Lineup</span>
-          <h1 class="display-5 fw-bold mb-2">Brand New Nissan Inventory</h1>
+          <span class="badge bg-primary text-uppercase px-3 py-1.5 mb-2 fw-bold" style="font-size: 0.75rem;">Brand New Vehicles &bull; Tema Community 4</span>
+          <h1 class="display-5 fw-bold mb-2">Available Vehicle Inventory &amp; Catalog</h1>
           <p class="lead text-light mb-0">
-            Official showroom inventory in affiliation with <strong>Bowin Dawin Motors</strong>. Featuring the Z9, Rich 6, Rich 7, and Paladin—100% brand-new, factory-delivered, and fully customs cleared at Tema Community 4.
+            Featuring 100% brand-new vehicles from <strong>Zhengzhou Nissan</strong>, <strong>BYD</strong>, and <strong>Jetour</strong>. Backed by verified GRA customs clearance and dedicated aftersales support at Tema Community 4.
           </p>
         </div>
         <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
@@ -122,46 +122,84 @@
     <div class="container">
       <!-- Quick Chips -->
       <div class="d-flex flex-wrap align-items-center gap-2 mb-3" id="filter-chips-wrapper">
-        <span class="small fw-bold text-muted me-1">Quick Select:</span>
-        <button class="filter-chip active" data-filter-type="all">All Nissan Models</button>
-        <button class="filter-chip" data-filter-type="model" data-filter-value="Z9">Nissan Z9 (PHEV 4x4)</button>
-        <button class="filter-chip" data-filter-type="model" data-filter-value="Rich 6">Nissan Rich 6 (2.3T Diesel)</button>
-        <button class="filter-chip" data-filter-type="model" data-filter-value="Rich 7">Nissan Rich 7 (2.0T Luxury)</button>
-        <button class="filter-chip" data-filter-type="model" data-filter-value="Paladin">Nissan Paladin (4x4 SUV)</button>
+        <span class="small fw-bold text-muted me-1">Quick Filter:</span>
+        <button class="filter-chip active" data-filter-type="all">All Brands &amp; Models</button>
+        <button class="filter-chip" data-filter-type="brand" data-filter-value="Nissan">Zhengzhou Nissan</button>
+        <button class="filter-chip" data-filter-type="brand" data-filter-value="BYD">BYD (Electric &amp; Hybrid)</button>
+        <button class="filter-chip" data-filter-type="brand" data-filter-value="Jetour">Jetour (Adventure SUVs)</button>
         <button class="filter-chip" data-filter-type="body" data-filter-value="Pickup Truck">Double Cab Pickups</button>
+        <button class="filter-chip" data-filter-type="body" data-filter-value="SUV">SUVs</button>
+        <button class="filter-chip" data-filter-type="fuel" data-filter-value="Electric">Pure Electric (EV)</button>
+        <button class="filter-chip" data-filter-type="fuel" data-filter-value="Hybrid">Hybrid / PHEV</button>
       </div>
 
       <!-- Advanced Filter Form -->
       <div class="row g-2 align-items-center">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-6">
           <div class="input-group">
             <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
-            <input type="text" id="inventory-search" class="form-control border-start-0" placeholder="Search by model, engine, or keywords...">
+            <input type="text" id="inventory-search" class="form-control border-start-0" placeholder="Search model, brand, engine...">
           </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6">
+          <select id="filter-brand" class="form-select">
+            <option value="all">All Brands</option>
+            <option value="Nissan">Zhengzhou Nissan</option>
+            <option value="BYD">BYD</option>
+            <option value="Jetour">Jetour</option>
+          </select>
         </div>
 
         <div class="col-lg-3 col-md-3 col-6">
           <select id="filter-model" class="form-select">
             <option value="all">All Models</option>
-            <option value="Z9">Nissan Z9</option>
-            <option value="Rich 6">Nissan Rich 6</option>
-            <option value="Rich 7">Nissan Rich 7</option>
-            <option value="Paladin">Nissan Paladin</option>
-          </select>
-        </div>
-
-        <div class="col-lg-2 col-md-3 col-6">
-          <select id="filter-body" class="form-select">
-            <option value="all">All Body Types</option>
-            <option value="Pickup Truck">Pickup Truck</option>
-            <option value="SUV">Off-Road SUV</option>
+            <optgroup label="Nissan">
+              <option value="Z9">Nissan Z9</option>
+              <option value="Rich 6">Nissan Rich 6</option>
+              <option value="Rich 7">Nissan Rich 7</option>
+              <option value="Paladin">Nissan Paladin</option>
+            </optgroup>
+            <optgroup label="BYD">
+              <option value="Shark 6">BYD Shark 6 (Pickup)</option>
+              <option value="Seal">BYD Seal (Sedan)</option>
+              <option value="Song Plus">BYD Song Plus DM-i (SUV)</option>
+              <option value="Atto 3">BYD Atto 3 (SUV)</option>
+              <option value="Tang">BYD Tang (7-Seater SUV)</option>
+              <option value="Han">BYD Han (Sedan)</option>
+              <option value="Dolphin">BYD Dolphin (Hatchback)</option>
+              <option value="Seagull">BYD Seagull (Hatchback)</option>
+              <option value="Yangwang U8">BYD Yangwang U8 (Super SUV)</option>
+              <option value="Denza D9">BYD Denza D9 (Luxury MPV)</option>
+            </optgroup>
+            <optgroup label="Jetour">
+              <option value="T2 Traveller">Jetour T2 Traveller (4x4)</option>
+              <option value="Shanhai T2">Jetour Shanhai T2 (PHEV)</option>
+              <option value="Dashing">Jetour Dashing (Coupe SUV)</option>
+              <option value="X70 Plus">Jetour X70 Plus (7-Seater)</option>
+              <option value="X90 Plus">Jetour X90 Plus (Executive)</option>
+              <option value="T1">Jetour T1 (Compact 4x4)</option>
+              <option value="Shanhai L9">Jetour Shanhai L9 (Hybrid)</option>
+            </optgroup>
           </select>
         </div>
 
         <div class="col-lg-2 col-md-4 col-6">
+          <select id="filter-body" class="form-select">
+            <option value="all">All Body Types</option>
+            <option value="Pickup Truck">Pickup Truck</option>
+            <option value="SUV">SUV</option>
+            <option value="Sedan">Luxury Sedan</option>
+            <option value="Hatchback">Hatchback / City EV</option>
+            <option value="Van / MPV">Executive MPV</option>
+          </select>
+        </div>
+
+        <div class="col-lg-1 col-md-4 col-6">
           <select id="filter-fuel" class="form-select">
-            <option value="all">All Fuel Types</option>
+            <option value="all">All Fuels</option>
             <option value="Hybrid">Hybrid / PHEV</option>
+            <option value="Electric">Electric (EV)</option>
             <option value="Diesel">Diesel</option>
             <option value="Petrol">Petrol</option>
           </select>
@@ -170,7 +208,7 @@
         <div class="col-lg-1 col-md-4 col-6">
           <select id="inventory-sort" class="form-select">
             <option value="featured">Featured</option>
-            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-asc">A-Z</option>
             <option value="year-new">Newest</option>
           </select>
         </div>

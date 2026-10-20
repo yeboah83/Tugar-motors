@@ -137,6 +137,41 @@ function initCarDetailsPage() {
         }
       });
     }
+  } else if (galleryViewport) {
+    // When no car image is provided (e.g. BYD / Jetour catalog models)
+    if (previousButton) previousButton.style.display = "none";
+    if (nextButton) nextButton.style.display = "none";
+    if (galleryCounter) galleryCounter.style.display = "none";
+    if (mainImg) mainImg.style.display = "none";
+
+    const isByd = car.make.toUpperCase() === "BYD";
+    const brandGrad = isByd
+      ? "linear-gradient(135deg, #06182E 0%, #0D3B66 50%, #1565C0 100%)"
+      : "linear-gradient(135deg, #1C1917 0%, #292524 50%, #44403C 100%)";
+    const icon = isByd ? "bi-lightning-charge-fill text-warning" : "bi-compass-fill text-warning";
+
+    const heroBanner = document.createElement("div");
+    heroBanner.className = "w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4 text-white rounded-3";
+    heroBanner.style.background = brandGrad;
+    heroBanner.style.minHeight = "300px";
+    heroBanner.innerHTML = `
+      <span class="badge bg-white bg-opacity-20 text-white mb-2 px-3 py-1.5 border border-white border-opacity-25 text-uppercase fw-bold" style="font-size: 0.78rem; letter-spacing: 1px;">
+        ${car.make} Official Catalog &bull; Brand New ${car.year}
+      </span>
+      <h2 class="display-6 fw-bold mb-1 text-white">${car.name}</h2>
+      <p class="lead text-light mb-3" style="max-width: 650px; font-size: 1.05rem;">${car.tagline}</p>
+      <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <span class="badge bg-light text-dark px-3 py-2 fw-bold"><i class="bi bi-shield-check text-primary me-1"></i>Verified Factory Order</span>
+        <span class="badge bg-light text-dark px-3 py-2 fw-bold"><i class="bi ${icon} me-1"></i>${car.fuelType} &bull; ${car.transmission}</span>
+        <span class="badge bg-light text-dark px-3 py-2 fw-bold"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Tema Community 4 Showroom</span>
+      </div>
+    `;
+    galleryViewport.appendChild(heroBanner);
+
+    const swipeHint = galleryViewport.parentElement ? galleryViewport.parentElement.querySelector("p.text-muted.small") : null;
+    if (swipeHint) {
+      swipeHint.innerHTML = `<i class="bi bi-file-earmark-text me-1"></i> Official technical specifications and equipment details catalog. Order upon request through Tugar Motors.`;
+    }
   }
 
   // 4b. Real Interior Photos section

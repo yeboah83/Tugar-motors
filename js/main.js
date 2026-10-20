@@ -36,8 +36,41 @@ function createCarCardHTML(car) {
   let badgeClass = "badge-in-stock";
   if (car.status === "Incoming") badgeClass = "badge-incoming";
   if (car.status === "Reserved") badgeClass = "badge-reserved";
+  if (car.status === "Order on Request") badgeClass = "badge-order";
 
   const waLink = getWhatsAppCarLink(car, "inquiring");
+  const hasImage = Boolean(car.image && car.image.trim());
+
+  let imageHTML = "";
+  if (hasImage) {
+    imageHTML = `
+      <a href="car-details.html?id=${car.id}" class="w-100 h-100 d-block">
+        <img src="${car.image}" alt="${car.name}" class="car-card-img" loading="lazy">
+      </a>
+    `;
+  } else {
+    // Elegant branded vector card banner with NO car image
+    const isByd = car.make.toUpperCase() === "BYD";
+    const brandGradient = isByd
+      ? "linear-gradient(135deg, #06182E 0%, #0D3B66 50%, #1565C0 100%)"
+      : "linear-gradient(135deg, #1C1917 0%, #292524 50%, #44403C 100%)";
+    const brandIcon = isByd ? "bi-lightning-charge-fill text-warning" : "bi-compass-fill text-warning";
+    const brandBadgeText = isByd ? "BYD Innovation" : "Jetour Adventure";
+
+    imageHTML = `
+      <a href="car-details.html?id=${car.id}" class="car-card-no-img" style="background: ${brandGradient};">
+        <span class="badge bg-white bg-opacity-15 text-white mb-2 px-2.5 py-1 border border-white border-opacity-20 small">
+          ${brandBadgeText} &bull; Brand New
+        </span>
+        <div class="car-card-no-img-brand">${car.make}</div>
+        <div class="car-card-no-img-icon"><i class="bi ${brandIcon}"></i></div>
+        <div class="car-card-no-img-model">${car.model}</div>
+        <span class="badge bg-light bg-opacity-20 text-white border border-white border-opacity-25 small mt-1">
+          <i class="bi bi-file-earmark-text me-1"></i>Official Specifications
+        </span>
+      </a>
+    `;
+  }
 
   return `
     <div class="col-lg-6 col-md-6 mb-4" data-car-id="${car.id}">
@@ -45,9 +78,7 @@ function createCarCardHTML(car) {
         <div class="car-card-img-wrap">
           <span class="badge-status ${badgeClass} car-card-badge-top">${car.status}</span>
           <span class="car-card-condition-badge"><i class="bi bi-patch-check-fill text-warning me-1"></i>${car.condition}</span>
-          <a href="car-details.html?id=${car.id}" class="w-100 h-100 d-block">
-            <img src="${car.image}" alt="${car.name}" class="car-card-img" loading="lazy">
-          </a>
+          ${imageHTML}
         </div>
         <div class="car-card-body">
           <div class="d-flex justify-content-between align-items-center mb-2">
@@ -118,6 +149,7 @@ function initInventoryPage() {
   if (!inventoryContainer) return;
 
   const searchInput = document.getElementById("inventory-search");
+  const brandFilter = document.getElementById("filter-brand");
   const modelFilter = document.getElementById("filter-model");
   const bodyFilter = document.getElementById("filter-body");
   const fuelFilter = document.getElementById("filter-fuel");
@@ -128,13 +160,38 @@ function initInventoryPage() {
 
   // Check URL params for pre-filter (e.g. from home search)
   const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("brand") && brandFilter) brandFilter.value = urlParams.get("brand");
   if (urlParams.get("model") && modelFilter) modelFilter.value = urlParams.get("model");
   if (urlParams.get("body") && bodyFilter) bodyFilter.value = urlParams.get("body");
   if (urlParams.get("fuel") && fuelFilter) fuelFilter.value = urlParams.get("fuel");
   if (urlParams.get("search") && searchInput) searchInput.value = urlParams.get("search");
 
+  // Sync active chip if pre-filtered
+  if (chipContainer) {
+    if (urlParams.get("brand")) {
+      const target = chipContainer.querySelector(`.filter-chip[data-filter-type="brand"][data-filter-value="${urlParams.get("brand")}"]`);
+      if (target) {
+        chipContainer.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+        target.classList.add("active");
+      }
+    } else if (urlParams.get("body")) {
+      const target = chipContainer.querySelector(`.filter-chip[data-filter-type="body"][data-filter-value="${urlParams.get("body")}"]`);
+      if (target) {
+        chipContainer.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+        target.classList.add("active");
+      }
+    } else if (urlParams.get("fuel")) {
+      const target = chipContainer.querySelector(`.filter-chip[data-filter-type="fuel"][data-filter-value="${urlParams.get("fuel")}"]`);
+      if (target) {
+        chipContainer.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+        target.classList.add("active");
+      }
+    }
+  }
+
   function applyFilters() {
     const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+    const selectedBrand = brandFilter ? brandFilter.value : "all";
     const selectedModel = modelFilter ? modelFilter.value : "all";
     const selectedBody = bodyFilter ? bodyFilter.value : "all";
     const selectedFuel = fuelFilter ? fuelFilter.value : "all";
@@ -145,6 +202,10 @@ function initInventoryPage() {
       if (query) {
         const fullText = `${car.name} ${car.make} ${car.model} ${car.year} ${car.tagline} ${car.fuelType} ${car.engine}`.toLowerCase();
         if (!fullText.includes(query)) return false;
+      }
+      // Brand
+      if (selectedBrand !== "all" && car.make.toLowerCase() !== selectedBrand.toLowerCase()) {
+        return false;
       }
       // Model
       if (selectedModel !== "all" && !car.model.toLowerCase().includes(selectedModel.toLowerCase())) {
@@ -173,7 +234,7 @@ function initInventoryPage() {
 
     // Render Count
     if (countBadge) {
-      countBadge.textContent = `${filtered.length} Brand New Nissan Vehicles Available`;
+      countBadge.textContent = `${filtered.length} Brand New Vehicles Available`;
     }
 
     // Render Cards
@@ -183,11 +244,11 @@ function initInventoryPage() {
           <div class="p-5 bg-white rounded-4 border">
             <i class="bi bi-car-front text-muted" style="font-size: 3.5rem;"></i>
             <h4 class="mt-3 fw-bold">No Vehicles Match Your Criteria</h4>
-            <p class="text-muted">We stock the official brand new Zhengzhou Nissan lineup: Z9, Rich 6, Rich 7, and Paladin.</p>
+            <p class="text-muted">We offer Brand New Zhengzhou Nissan, BYD, and Jetour vehicles.</p>
             <button class="btn btn-tm-primary mt-2" onclick="document.getElementById('filter-reset-btn').click()">
               Reset All Filters
             </button>
-            <a href="${getWhatsAppGeneralLink('Nissan Vehicle Inquiry')}" target="_blank" class="btn btn-tm-whatsapp mt-2 ms-2">
+            <a href="${getWhatsAppGeneralLink('Vehicle Catalog Inquiry')}" target="_blank" class="btn btn-tm-whatsapp mt-2 ms-2">
               <i class="bi bi-whatsapp"></i> Chat with Samuel on WhatsApp
             </a>
           </div>
@@ -200,6 +261,7 @@ function initInventoryPage() {
 
   // Attach event listeners
   if (searchInput) searchInput.addEventListener("input", applyFilters);
+  if (brandFilter) brandFilter.addEventListener("change", applyFilters);
   if (modelFilter) modelFilter.addEventListener("change", applyFilters);
   if (bodyFilter) bodyFilter.addEventListener("change", applyFilters);
   if (fuelFilter) fuelFilter.addEventListener("change", applyFilters);
@@ -208,11 +270,14 @@ function initInventoryPage() {
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
       if (searchInput) searchInput.value = "";
+      if (brandFilter) brandFilter.value = "all";
       if (modelFilter) modelFilter.value = "all";
       if (bodyFilter) bodyFilter.value = "all";
       if (fuelFilter) fuelFilter.value = "all";
       if (sortSelect) sortSelect.value = "featured";
       document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+      const allChip = document.querySelector('.filter-chip[data-filter-type="all"]');
+      if (allChip) allChip.classList.add("active");
       applyFilters();
     });
   }
@@ -228,12 +293,19 @@ function initInventoryPage() {
         chip.classList.add("active");
 
         if (filterType === "all") {
+          if (brandFilter) brandFilter.value = "all";
           if (modelFilter) modelFilter.value = "all";
           if (bodyFilter) bodyFilter.value = "all";
+          if (fuelFilter) fuelFilter.value = "all";
+        } else if (filterType === "brand" && brandFilter) {
+          brandFilter.value = filterValue;
+          if (modelFilter) modelFilter.value = "all";
         } else if (filterType === "model" && modelFilter) {
           modelFilter.value = filterValue;
         } else if (filterType === "body" && bodyFilter) {
           bodyFilter.value = filterValue;
+        } else if (filterType === "fuel" && fuelFilter) {
+          fuelFilter.value = filterValue;
         }
         applyFilters();
       });
